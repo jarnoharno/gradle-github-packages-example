@@ -1,0 +1,12 @@
+apply plugin: GithubPackagesPlugin
+
+githubPackages {
+    repository = 'jarnoharno/example-packages'
+}
+
+subprojects {
+    repositories {
+        maven githubPackages()
+        jcenter()
+    }
+}

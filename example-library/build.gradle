@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group 'com.jarnoharno'
+version '1.0-SNAPSHOT'
+
+dependencies {
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
+
+task packageJavadoc(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    archiveClassifier.set 'javadoc'
+}
+
+task packageSources(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
+    archiveClassifier.set 'sources'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact packageSources
+            artifact packageJavadoc
+        }
+    }
+    repositories {
+        maven githubPackages()
+    }
+}

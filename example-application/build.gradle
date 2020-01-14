@@ -1,0 +1,11 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation group: 'com.jarnoharno', name: 'example-library', version: '1.0-SNAPSHOT'
+}
+
+application {
+    mainClassName = 'com.jarnoharno.application.Application'
+}
