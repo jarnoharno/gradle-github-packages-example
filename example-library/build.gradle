@@ -11,11 +11,6 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
-task packageJavadoc(type: Jar, dependsOn: javadoc) {
-    from javadoc.destinationDir
-    archiveClassifier.set 'javadoc'
-}
-
 task packageSources(type: Jar, dependsOn: classes) {
     from sourceSets.main.allSource
     archiveClassifier.set 'sources'
@@ -26,7 +21,6 @@ publishing {
         maven(MavenPublication) {
             from components.java
             artifact packageSources
-            artifact packageJavadoc
         }
     }
     repositories {
